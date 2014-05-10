@@ -89,21 +89,40 @@
                 },
                 {
                     'id': 4,
-                    'text': 'My Symptoms have improved after 48 hours',
+                    'text': 'My symptoms have improved after 48 hours',
                     'status': 'warning',
                     'no': 12,
                     'yes': 5,
                 },
                 {
                     'id': 5,
-                    'text': 'I feel more short of breath than usual',
+                    'text': 'I have more shortness of breath than usual',
                     'status': 'normal',
                     'no': 7,
                     'yes': 6,
                 },
                 {
                     'id': 6,
-                    'text': 'I have been more short of breath than usual for at least 2 days',
+                    'text': 'I have had more shortness of breath than usual for at least 2 days',
+                    'status': 'warning',
+                    'no': 7,
+                    'yes': 13,
+                },
+                {
+                    'id':13,
+                    'text': 'I have started the prescribed prednisone',
+                    'status': 'warning',
+                    'no': 14,
+                    'yes': 15,
+                },
+                {
+                    'id':14,
+                    'text': 'Start the prescribed prednisone',
+                    'status': 'warning',
+                },
+                {
+                    'id':15,
+                    'text': 'I am very short of breath, nervous, confused and/or drowsy, and/or I have chest pain',
                     'status': 'warning',
                     'no': 7,
                     'yes': 12,
@@ -141,7 +160,7 @@
                 },
                 {
                     'id': 12,
-                    'text': 'Go to the nearest Hospital',
+                    'text': 'Go to the nearest Hospital. <br>A message has been sent to your emergency contact.',
                     'status': 'danger',
                 }
             ];
@@ -155,7 +174,7 @@
 
         <script id="questionTemplate" type="html/template">
              <h1 class="text-center">
-              {{text}}
+              {{{text}}}
             </h1>
             <div class="form-group">
                 {{#yes}}<button class="btn btn-lg btn-primary btn-block yes">YES</button>{{/yes}}
