@@ -16,11 +16,12 @@ body > .container {
 body > .navbar {
   background: #226BB4;
   border: 0;
+  padding-top: 20px;
 }
 
 img.logo {
   height: 30px;
-  width: auto;
+  width: 100px;
 }
 
 .question {
@@ -42,6 +43,10 @@ img.logo {
 .btn.no {
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.btn.again {
+  margin-top: 1.4em;
 }
 
 .btn-primary {
@@ -104,5 +109,5 @@ footer p img {
   margin-right: 0.4em;
   margin-top: -0.3em;
   height: 22px;
-  width: auto;
+  width: 22px;
 }

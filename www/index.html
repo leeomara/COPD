@@ -55,9 +55,9 @@
     var questions = [
         {
             'id': 0,
-            'text': 'My sputum colour is normal.',
-            'no': 1,
-            'yes': 5,
+            'text': 'My sputum colour is abnormal.',
+            'no': 5,
+            'yes': 1,
             'status': 'normal'
         },
         {
@@ -150,7 +150,7 @@
         },
         {
             'id': 11,
-            'text': 'Continue with healthy lung exercises.',
+            'text': 'Keep active and continue with normal puffer use.',
             'status': 'normal',
             'htmlClass': 'well'
         },
@@ -183,6 +183,7 @@
       <div class="form-group">
         {{ #yes }}<div class="col-xs-6"><button class="btn btn-lg btn-block btn-primary yes">YES</button></div>{{ /yes }}
         {{ #no }}<div class="col-xs-6"><button class="btn btn-lg btn-block btn-default no">NO</button></div>{{ /no }}
+        {{ ^yes }}<div class="col-xs-offset-3 col-xs-6"><a href="index.html" class="btn btn-lg btn-block btn-default again"><span class="glyphicon glyphicon-repeat"></span> Reload</a></div>{{ /yes }}
       </div>
     </div>
   </script>
