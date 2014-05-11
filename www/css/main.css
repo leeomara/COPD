@@ -18,6 +18,11 @@ body > .navbar {
   border: 0;
 }
 
+img.logo {
+  height: 30px;
+  width: auto;
+}
+
 .question {
   font-size: 1.6em;
   margin-bottom: 1em;
@@ -93,4 +98,11 @@ footer .status {
   color: #fff;
   font-size: 2em;
   margin-top: 0.3em;
+}
+
+footer p img {
+  margin-right: 0.4em;
+  margin-top: -0.3em;
+  height: 22px;
+  width: auto;
 }
