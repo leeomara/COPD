@@ -14,6 +14,7 @@ var AppView = Backbone.View.extend({
     questionContainer: '.questionContainer',
     allDoneTemplate: '#doneTemplate',
     currQuestion: null,
+    counter: 1,
     events:{
         'click .next': 'getNextQuestion',
         'click .yes': 'yes',
@@ -46,6 +47,8 @@ var AppView = Backbone.View.extend({
     */
     getNextQuestion: function(id) {
         this.currQuestion = this.questionCollection.get(id);
+        this.currQuestion.set('counter',this.counter);
+        this.counter ++;
         var questionView = new QuestionView({model:this.currQuestion});
         var el = questionView.render().el;
 

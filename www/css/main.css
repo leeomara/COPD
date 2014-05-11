@@ -1,14 +1,3 @@
-/*
-
-darker teal: #00a79e;
-lighter teal: #6fcac4;
-
-green: #3F9537;
-yellow: #F8B525;
-red: #D1232A;
-
-*/
-
 html {
   position: relative;
   min-height: 100%;
@@ -21,11 +10,17 @@ body {
 }
 
 body > .container {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 body > .navbar {
+  background: #226BB4;
   border: 0;
+}
+
+.question {
+  font-size: 1.6em;
+  margin-bottom: 1em;
 }
 
 .navbar-default .navbar-brand {
@@ -38,8 +33,22 @@ body > .navbar {
   border-radius: 0;
 }
 
+.btn.yes,
+.btn.no {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.btn-primary {
+  background: #226BB4;
+}
+
 .no-border {
   border: 0;
+}
+
+.top {
+  height: 240px;
 }
 
 .form-control {

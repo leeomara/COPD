@@ -7,6 +7,7 @@
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/roboto.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <title>COPeD</title>
 </head>
@@ -16,18 +17,11 @@
       <div class="pull-left">
         <a class="navbar-brand" href="#">COPeD</a>
       </div>
-
-      <!-- <div class="navbar-text pull-right">
-        <button class="btn btn-sm btn-default no-border"><span class="glyphicon glyphicon-stats"></span></button>
-        <button class="btn btn-sm btn-default no-border"><span class="glyphicon glyphicon-asterisk"></span></button>
-      </div> -->
     </div>
   </nav>
 
   <div class="container">
-
     <div class="questionContainer"></div>
-
   </div>
 
   <footer class="normal">
@@ -36,13 +30,11 @@
     </div>
   </footer>
 
-
   <footer class="warning"  style="display:none;">
     <div class="container">
       <p class="text-muted text-center status">WARNING</p>
     </div>
   </footer>
-
 
   <footer class="danger" style="display:none;">
     <div class="container">
@@ -52,136 +44,147 @@
 
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
-        <script type="text/javascript" src="js/lib/backbone-min.js"></script>
-        <script type="text/javascript" src="js/lib/mustache.min.js"></script>
-        <script type="text/javascript" src="js/models/question-model.js"></script>
-        <script type="text/javascript" src="js/collections/question-collection.js"></script>
-        <script type="text/javascript" src="js/views/question-view.js"></script>
-        <script type="text/javascript" src="js/views/app-view.js"></script>
-        <script type="text/javascript">
+  <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+  <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+  <script type="text/javascript" src="js/lib/mustache.min.js"></script>
+  <script type="text/javascript" src="js/models/question-model.js"></script>
+  <script type="text/javascript" src="js/collections/question-collection.js"></script>
+  <script type="text/javascript" src="js/views/question-view.js"></script>
+  <script type="text/javascript" src="js/views/app-view.js"></script>
+  <script type="text/javascript">
+    var questions = [
+        {
+            'id': 0,
+            'text': 'My sputum colour is normal.',
+            'no': 1,
+            'yes': 5,
+            'status': 'normal'
+        },
+        {
+            'id': 1,
+            'text': 'My sputum colour has changed for at least 2 days.',
+            'no': 5,
+            'yes': 2,
+            'status': 'warning'
+        },
+        {
+            'id': 2,
+            'text': 'I have started the prescribed antibiotics.',
+            'no': 3,
+            'yes': 4,
+            'status': 'warning'
+        },
+        {
+            'id': 3,
+            'text': 'Start the prescribed antibiotics.',
+            'status': 'warning',
+            'htmlClass': 'well'
+        },
+        {
+            'id': 4,
+            'text': 'My symptoms have improved after 48 hours.',
+            'status': 'warning',
+            'no': 12,
+            'yes': 5,
+        },
+        {
+            'id': 5,
+            'text': 'I have more shortness of breath than usual.',
+            'status': 'normal',
+            'no': 7,
+            'yes': 6,
+        },
+        {
+            'id': 6,
+            'text': 'I have had more shortness of breath than usual<br>for at least 2 days.',
+            'status': 'warning',
+            'no': 7,
+            'yes': 13,
+        },
+        {
+            'id':13,
+            'text': 'I have started the prescribed <i>prednisone</i>.',
+            'status': 'warning',
+            'no': 14,
+            'yes': 15,
+        },
+        {
+            'id':14,
+            'text': 'Start the prescribed <i>prednisone</i>.',
+            'status': 'warning',
+            'htmlClass': 'well'
+        },
+        {
+            'id':15,
+            'text': 'I am very short of breath, nervous, confused and/or<br>I have chest pain.',
+            'status': 'warning',
+            'no': 7,
+            'yes': 12,
+        },
+        {
+            'id': 7,
+            'text': 'I have used my puffer more than usual.',
+            'status': 'warning',
+            'no': 11,
+            'yes': 8,
+        },
+        {
+            'id': 8,
+            'text': 'I have increased my puffer usage to the prescribed maximum.',
+            'status': 'warning',
+            'no': 9,
+            'yes': 10,
+        },
+        {
+            'id': 9,
+            'text': 'Increase puffer usage to the prescribed maximum.',
+            'status': 'warning',
+            'htmlClass': 'well'
+        },
+        {
+            'id': 10,
+            'text': 'I am getting enough relief.',
+            'status': 'warning',
+            'no': 12,
+            'yes': 11,
+        },
+        {
+            'id': 11,
+            'text': 'Continue with healthy lung exercises.',
+            'status': 'normal',
+            'htmlClass': 'well'
+        },
+        {
+            'id': 12,
+            'text': 'Go to the nearest Hospital.<br><br>A message has been sent to your emergency contact.',
+            'status': 'danger',
+            'htmlClass': 'well'
+        }
+    ];
+    $(function() {
+        var questionCollection = new QuestionsCollection(questions);
+        app = new AppView({'questionCollection':questionCollection, el:$('.app')});
+        app.run();
+    });
+  </script>
 
+  <script id="questionTemplate" type="html/template">
+    <div class="animated fadeInRight">
+      <div class="top">
+        <div class="{{ htmlClass }}">
+          {{ #yes }}<span class="label label-info">QUESTION {{counter}}</span>{{ /yes }}
+          {{ ^yes }}<span class="label label-info">SUGGESTION</span>{{ /yes }}
+          <h1 class="text-center question">
+            {{{ text }}}
+          </h1>
+        </div>
+      </div>
 
-            var questions = [
-                {
-                    'id': 0,
-                    'text': 'My sputum colour is normal',
-                    'no': 1,
-                    'yes': 5,
-                    'status': 'normal'
-                },
-                {
-                    'id': 1,
-                    'text': 'My sputum colour has changed for at least 2 days',
-                    'no': 5,
-                    'yes': 2,
-                    'status': 'warning'
-                },
-                {
-                    'id': 2,
-                    'text': 'I have started the prescribed anitbiotics',
-                    'no': 3,
-                    'yes': 4,
-                    'status': 'warning'
-                },
-                {
-                    'id': 3,
-                    'text': 'Start the prescribed anitbiotics',
-                    'status': 'warning'
-                },
-                {
-                    'id': 4,
-                    'text': 'My symptoms have improved after 48 hours',
-                    'status': 'warning',
-                    'no': 12,
-                    'yes': 5,
-                },
-                {
-                    'id': 5,
-                    'text': 'I have more shortness of breath than usual',
-                    'status': 'normal',
-                    'no': 7,
-                    'yes': 6,
-                },
-                {
-                    'id': 6,
-                    'text': 'I have had more shortness of breath than usual for at least 2 days',
-                    'status': 'warning',
-                    'no': 7,
-                    'yes': 13,
-                },
-                {
-                    'id':13,
-                    'text': 'I have started the prescribed prednisone',
-                    'status': 'warning',
-                    'no': 14,
-                    'yes': 15,
-                },
-                {
-                    'id':14,
-                    'text': 'Start the prescribed prednisone',
-                    'status': 'warning',
-                },
-                {
-                    'id':15,
-                    'text': 'I am very short of breath, nervous, confused and/or drowsy, and/or I have chest pain',
-                    'status': 'warning',
-                    'no': 7,
-                    'yes': 12,
-                },
-                {
-                    'id': 7,
-                    'text': 'I have used my puffer more than usual',
-                    'status': 'warning',
-                    'no': 11,
-                    'yes': 8,
-                },
-                {
-                    'id': 8,
-                    'text': 'I have increased my puffer usage to the prescribed maximum',
-                    'status': 'warning',
-                    'no': 9,
-                    'yes': 10,
-                },
-                {
-                    'id': 9,
-                    'text': 'Increase puffer usage to the prescribed maximum',
-                    'status': 'warning',
-                },
-                {
-                    'id': 10,
-                    'text': 'I am getting enough relief',
-                    'status': 'warning',
-                    'no': 12,
-                    'yes': 11,
-                },
-                {
-                    'id': 11,
-                    'text': 'Continue with healthy lung exercises',
-                    'status': 'normal',
-                },
-                {
-                    'id': 12,
-                    'text': 'Go to the nearest Hospital. <br>A message has been sent to your emergency contact.',
-                    'status': 'danger',
-                }
-            ];
-            $(function() {
-                var questionCollection = new QuestionsCollection(questions);
-                app = new AppView({'questionCollection':questionCollection, el:$('.app')});
-                app.run();
-            });
-        </script>
-
-
-        <script id="questionTemplate" type="html/template">
-             <h1 class="text-center">
-              {{{text}}}
-            </h1>
-            <div class="form-group">
-                {{#yes}}<button class="btn btn-lg btn-primary btn-block yes">YES</button>{{/yes}}
-                {{#no}}<button class="btn btn-lg btn-default btn-block no">NO</button>{{/no}}
-            </div>
-        </script>
+      <div class="form-group">
+        {{ #yes }}<div class="col-xs-6"><button class="btn btn-lg btn-block btn-primary yes">YES</button></div>{{ /yes }}
+        {{ #no }}<div class="col-xs-6"><button class="btn btn-lg btn-block btn-default no">NO</button></div>{{ /no }}
+      </div>
+    </div>
+  </script>
 </body>
 </html>
